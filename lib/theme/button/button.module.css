@@ -1,0 +1,7 @@
+.root {
+    &[data-variant='primary'] {
+        background: linear-gradient(45deg, var(--mantine-color-violet-filled) 10%, var(--mantine-color-blue-filled) 90%);
+        color: var(--mantine-color-white);
+        border-width: 0;
+    }
+}
