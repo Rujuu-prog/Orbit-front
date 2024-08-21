@@ -1,8 +1,20 @@
 import {List} from "@mantine/core";
 import PendingIcon from "@/components/icon/todo/pendingIcon/PendingIcon";
 import DoneIcon from "@/components/icon/todo/doneIcon/DoneIcon";
+import axios from "axios";
+import useSWR from "swr";
+
+const fetcher = async (url: string) => {
+    const response = await axios.get(url);
+    return response.data;
+};
 
 export default function TodoPage() {
+    const { data, error } = useSWR('/api/todo', fetcher);
+    console.log(data);
+
+    if (error) return <div>Failed to load tasks</div>;
+    if (!data) return <div>Loading...</div>;
     return (
         <List
             spacing="xs"

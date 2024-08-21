@@ -8,14 +8,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-// axiosを使ったfetcher関数
 async function fetcher(url: string, { arg }: { arg: { username: string; password: string } }) {
     try{
         const response = await axios.post(url, arg);
         return response.data;
     } catch (error) {
         console.error(error);
-        throw error; // ここでエラーを投げることで、handleSignInでキャッチできる
+        throw error;
     }
 }
 
@@ -34,7 +33,7 @@ export default function SignInPage() {
             await trigger({ username, password });
             // サインイン成功時に/todoにリダイレクト
             router.push('/todo');
-        } catch (err: any) {  // TypeScriptでエラーをキャッチする際は、型アサーションを使うことができます
+        } catch (err: any) {
             console.error('Sign in failed:', err);
             if (err.response && err.response.data) {
                 setErrorMessage(err.response.data.error || 'Sign-in failed');
